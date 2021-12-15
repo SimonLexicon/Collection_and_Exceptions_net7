@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using static System.Console;
@@ -18,6 +19,11 @@ namespace Collection_and_Exceptions_net7
                     "\n2:PlayWithDictionary" +
                     "\n3:PlayWithStringList" +
                     "\n4:PlayWithStringBuilder" +
+                    "\n5:RandomExamples" +
+                    "\n6:AppendToNameStr" +
+                    "\n7:TestString" +
+                    "\n8:ArrayList" +
+                    "\n9:List Capacity/Count" +
 
                     ""
                     );
@@ -43,6 +49,44 @@ namespace Collection_and_Exceptions_net7
                     case 4:
                         PlayWithStringBuilder();
                         break;
+                    
+                    case 5:
+                        RandomExamples();
+                        break;
+                    
+                    case 6:
+                        string myName = "Simon";
+                        WriteLine(myName);
+                        WriteLine(AppendToNameStr(myName));
+                        break;
+                    
+                    case 7:
+                        // StringBuilder is mutable, and can be changed by method.
+                        StringBuilder strB = new StringBuilder("TestString");
+                        AppendNameToStrBImmutable(strB);
+                        WriteLine(strB);
+                        break;
+                    
+                    case 8:
+                        PlayWithArrayList();
+                        break;
+                         
+                    case 9:
+                        List<string> nameList = new List<string>();
+                        WriteLine("Count:"+nameList.Count);
+                        WriteLine("Capacity:" + nameList.Capacity);
+                        for(int i = 0; i < 999999; i++)
+                        {
+                            nameList.Add("Tomas");
+
+                        }
+              
+                        WriteLine("Count:" + nameList.Count);
+                        WriteLine("Capacity:" + nameList.Capacity);
+                        WriteLine("\n");
+
+                        break;
+
 
                     default:
                         WriteLine("Default case, something went wrong");
@@ -205,6 +249,60 @@ namespace Collection_and_Exceptions_net7
             DateTime endSB = DateTime.Now;
             WriteLine("End StringBuilder:"+(endSB - startSB));
             ReadKey();
+
+        }
+
+        public static void RandomExamples()
+        {
+            Random rnd = new Random();
+            string[] malePetNames =
+            {"Rufus", "Bear", "Dakota", "Fido",
+                          "Vanya", "Samuel", "Koani", "Volodya",
+                          "Prince", "Yiska"};
+
+            string[] femalePetNames =
+            {"Maggie", "Penny", "Saya", "Princess",
+                            "Abby", "Laila", "Sadie", "Olivia",
+                            "Starlight", "Talla" };
+
+            int nameIndex = rnd.Next(malePetNames.Length);
+            WriteLine(malePetNames[nameIndex]);
+
+            nameIndex = rnd.Next(femalePetNames.Length);
+            WriteLine(femalePetNames[nameIndex]);
+
+            //nameIndex = rnd.Next(-10, 2);
+            //WriteLine(nameIndex);
+
+        }
+
+        public static string AppendToNameStr(string myname)
+        {
+            string myNameAppend = "Mitt namn:";
+            myNameAppend += myname;
+            return myNameAppend;
+        }
+
+        static void AppendNameToStrBImmutable(StringBuilder str)
+        {
+            string str1 = "Simon";
+            str.Append(str1);
+        }
+
+        private static void PlayWithArrayList()
+        {
+            // Do not use ArrayList. Use List<>/Array[] instead
+            ArrayList al = new ArrayList();
+            al.Add(10);
+            al.Add(10);
+            al.Add(10);
+            al.Add(10);
+            //al.Add("10"); //Is ok.
+            // al.Add(true); Is ok.
+            foreach (int item in al)
+            {
+                WriteLine(item);
+            }
 
         }
     }
